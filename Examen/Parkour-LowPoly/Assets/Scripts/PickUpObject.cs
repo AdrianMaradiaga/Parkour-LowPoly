@@ -24,7 +24,7 @@ public class PickUpObject : MonoBehaviour
             }
         }
         else if (PickedObject != null)
-        {dw
+        {
             if (Input.GetKeyDown(KeyCode.F))
             {
                 PickedObject.GetComponent<PickableObject>().isPickable = true;

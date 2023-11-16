@@ -11,6 +11,9 @@ public class MoveWithPlatform : MonoBehaviour
     string groundName;
     string lastGroundName;
 
+    public float factorDivision = 4.2f;
+    public Vector3 originOffSet;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +21,12 @@ public class MoveWithPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (player.isGrounded)
         {
             RaycastHit hit;
-            if(Physics.SphereCast(transform.position, player.height / 4.2f, -transform.up, out hit))
+            if(Physics.SphereCast(transform.position + originOffSet, player.radius / factorDivision, -transform.up, out hit))
             {
                 GameObject groundedIn = hit.collider.gameObject;
                 groundName = groundedIn.name;
@@ -49,8 +52,8 @@ public class MoveWithPlatform : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        player = this.GetComponent <CharacterController>(); 
-        Gizmos.DrawWireSphere(transform.position, player.height / 4.2f);
+        player = this.GetComponent <CharacterController>();
+        Gizmos.DrawWireSphere(transform.position + originOffSet, player.radius / factorDivision); ;
     }
 
 }
